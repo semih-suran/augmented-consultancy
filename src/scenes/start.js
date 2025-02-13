@@ -7,6 +7,8 @@ import {
   WebXRHitTest,
   WebXRAnchorSystem,
   PointerEventTypes,
+  SceneLoader,
+  Scalar,
 } from "babylonjs";
 
 export async function startScene(engine) {
@@ -16,7 +18,16 @@ export async function startScene(engine) {
   const cam = new FreeCamera("cam", new Vector3(0, 0, -2), scene);
   cam.attachControl();
 
-  const dot = MeshBuilder.CreateSphere("dot", { diameter: 0.5 }, scene);
+  const dot = MeshBuilder.CreateSphere("dot", { diameter: 0.1 }, scene);
+
+  const { meshes, animationGroups } = await SceneLoader.ImportMeshAsync(
+    "",
+    "./models/",
+    "first_plate.glb",
+    scene
+  );
+
+  meshes[0].position.x = 2;
 
   const xr = await scene.createDefaultXRExperienceAsync({
     uiOptions: { sessionMode: "immersive-ar" },
@@ -39,7 +50,8 @@ export async function startScene(engine) {
   });
 
   anchorSystem.onAnchorAddedObservable.add((anchor) => {
-    anchor.attachedNode = dot.clone();
+    const clone = meshes[0].clone();
+    anchor.attachedNode = clone;
   });
 
   scene.onPointerObservable.add((event) => {

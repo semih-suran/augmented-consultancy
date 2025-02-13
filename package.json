@@ -13,6 +13,7 @@
     "vite-plugin-mkcert": "^1.17.6"
   },
   "dependencies": {
-    "babylonjs": "^7.49.0"
+    "babylonjs": "^7.49.0",
+    "babylonjs-loaders": "^7.49.0"
   }
 }
