@@ -5,6 +5,8 @@ import {
   Vector3,
   MeshBuilder,
   WebXRHitTest,
+  WebXRAnchorSystem,
+  PointerEventTypes,
 } from "babylonjs";
 
 export async function startScene(engine) {
@@ -22,9 +24,12 @@ export async function startScene(engine) {
 
   const fm = xr.baseExperience.featuresManager;
   const hitTest = fm.enableFeature(WebXRHitTest, "latest");
+  const anchorSystem = fm.enableFeature(WebXRAnchorSystem, "latest");
 
+  let lastHit = undefined;
   hitTest.onHitTestResultObservable.add((result) => {
     if (result.length) {
+      lastHit = result[0];
       result[0].transformationMatrix.decompose(
         dot.scaling,
         dot.rotationQuaternion,
@@ -32,6 +37,15 @@ export async function startScene(engine) {
       );
     }
   });
+
+  anchorSystem.onAnchorAddedObservable.add((anchor) => {
+    anchor.attachedNode = dot.clone();
+  });
+
+  scene.onPointerObservable.add((event) => {
+    if (lastHit && anchorSystem)
+      anchorSystem.addAnchorPointUsingHitTestResultAsync(lastHit);
+  }, PointerEventTypes.POINTERDOWN);
 
   await scene.whenReadyAsync();
 
