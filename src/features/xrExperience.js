@@ -1,5 +1,6 @@
 import { enableHitTest } from "./hitTest";
 import { enableAnchorSystem } from "./anchorSystem";
+import {enableLightEstimation} from "./lightEstimation"
 
 export async function enableXrExperience(scene) {
   try {
@@ -12,6 +13,7 @@ export async function enableXrExperience(scene) {
 
     enableHitTest(fm, scene);
     enableAnchorSystem(fm, scene);
+    enableLightEstimation(fm, scene);
   } catch (error) {
     console.log(error);
   }
