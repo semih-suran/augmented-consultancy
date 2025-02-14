@@ -10,8 +10,9 @@ export function getLastHit() {
 export function enableHitTest(fm, scene) {
   try {
     const hitTest = fm.enableFeature(WebXRHitTest, "latest");
-    const dot = MeshBuilder.CreateSphere("dot", { diameter: 0.1 }, scene);
-
+    const ground = scene.getMeshByName("ground");
+    if (!ground) throw new Error("Ground not found");
+    const dot = MeshBuilder.CreateSphere("dot", { diameter: 0.05 }, scene);
     hitTest.onHitTestResultObservable.add((result) => {
       if (result.length) {
         lastHit = result[0];
@@ -20,6 +21,7 @@ export function enableHitTest(fm, scene) {
           dot.rotationQuaternion,
           dot.position
         );
+        ground.position.y = dot.position.y - 0.03;
       } else lastHit = undefined;
     });
     enabled = true;
