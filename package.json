@@ -1,15 +1,6 @@
 {
   "name": "augmented_consultancy",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^6.1.0",
-    "vite-plugin-mkcert": "^1.17.6"
-  }
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {}
 }
