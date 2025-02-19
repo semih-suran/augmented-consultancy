@@ -5,19 +5,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Model-viewer Course: Steampunk Camera</title>
-    <meta name="description" content="An example from my model-viewer course" />
+    <title>Route Consultancy</title>
+    <meta
+      name="description"
+      content="An example AR scene for my fruit basket"
+    />
     <meta name="author" content="Nik Lever" />
 
-    <meta property="og:title" content="Model-viewer Course: Steampunk Camera" />
+    <meta property="og:title" content="AR Scene: Fruit Basket" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://niklever.com/courses/model-viewer"
-    />
+    <meta property="og:url" content="https://routeconsultancy.co.uk" />
     <meta
       property="og:description"
-      content="An example from my model-viewer course"
+      content="An example AR scene for my fruit basket"
     />
     <meta property="og:image" content="image.png" />
 
@@ -56,9 +56,10 @@
       src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
     ></script>
     <model-viewer
-      src="/models/Fruit_Plate_Fixed_Low-364.glb"
+      src="/public/models/Fruit_Plate_Fixed_Low-364.glb"
       camera-controls
       alt="A fruit basket"
+      skybox-image="../assets/hdr/apartment.hdr"
       ar
       ar-modes="webxr scene-viewer quick-look"
     ></model-viewer>
